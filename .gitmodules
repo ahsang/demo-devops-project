@@ -1,7 +1,8 @@
 [submodule "testapp"]
 	path = testapp
 	url = https://github.com/ahsang/golang-cicd
-	branch = main
+	branch = master
 [submodule "infrastructure-as-code"]
 	path = infrastructure-as-code
 	url = https://github.com/ahsang/certmanager-demo
+	branch = master
