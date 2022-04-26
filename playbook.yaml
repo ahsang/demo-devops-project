@@ -1,0 +1,52 @@
+- hosts: all
+  tasks:
+    - name: Install dependencies
+      become: yes
+      command: apt-get install conntrack unzip gnupg software-properties-common curl git -y
+    - name: Install terraform
+      become: yes
+      shell: |
+        curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+        apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+        apt-get update && sudo apt-get install terraform
+    - name: Install kubectl 
+      become: yes
+      command: snap install kubectl --classic
+    - name: Install microk8s 
+      become: yes
+      command: snap install microk8s --classic
+    - name: Wait for microk8s to install 
+      become: yes
+      command: microk8s status --wait-ready
+    - name: Starting microk8s
+      command: microk8s start 
+    - name: Enable dns addon
+      command: microk8s enable dns
+    - name: Setup kubectl 
+      command: microk8s config
+      register: kubectl_output
+    - name: copy the output to a local file
+      copy:
+        content: "{{ kubectl_output.stdout }}"
+        dest: "/tmp/kubeconfig"
+    - name: copy the output to a kubeconfig
+      copy:
+        content: "{{ kubectl_output.stdout }}"
+        dest: "~/.kube/config"
+    - name: Enable metallb addon
+      command: microk8s enable metallb:{{ansible_ssh_host}}-{{ansible_ssh_host}}
+    - name: Clone certmanager-demo repo
+      git:
+       repo: https://github.com/ahsang/certmanager-demo.git
+       dest: /tmp/cert-manager
+       clone: yes
+       update: yes
+       force: yes
+    - name: Install the infrastructure
+      community.general.terraform:
+        project_path: '/tmp/cert-manager'
+        force_init: true
+        state: planned
+        plan_file: tfplan
+
+      
