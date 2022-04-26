@@ -41,6 +41,7 @@
 
 ### Expected result
 - A deployment for our [test app](https://github.com/ahsang/golang-cicd) using the [helm chart](https://github.com/ahsang/certmanager-demo/tree/master/outyet) on the kubernetes cluster running inside our host
+- The [app docker image](https://hub.docker.com/repository/docker/ahsangondal/golang-cicd) is hosted in docker hub public registry which is set to auto build in case of any updates to the code
 - the app will be running behind an nginx ingress load balancer
 - [cert-manager](https://cert-manager.io/) will be deployed to generate lets encrypt ssl certs automatically so the app is accessible over tls on the given subdomain
 
