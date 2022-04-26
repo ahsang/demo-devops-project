@@ -17,6 +17,11 @@
     ```
     ansible-playbook -i '<host-ip>,' -u <username> playbook.yaml 
     ```
+    
+    To apply the kubernetes components as well please run
+    ```
+    ansible-playbook -i '<host-ip>,' -u <username> playbook.yaml -e apply_changes=true
+    ```
 - Point the subdomain DNS A record to the public ip of the host
 
 > This assumes the host is already accessible via ssh
@@ -26,7 +31,8 @@
 - Enables microk8s [metallb](https://metallb.universe.tf/) addon with the address range limited to the host ip and the microk8s dns addon
 - Sets up kubectl
 - Clones the infrastracture as code terraform project [repo](https://github.com/ahsang/certmanager-demo) to /tmp/certmanager-demo inside the host
-- Runs terraform init and terraform plan (Intentionally stopped at plan to save time)
+- Runs terraform init and terraform plan (Intentionally defaults at plan to save time) or runs terraform apply to provision the components.
+
 
 ## Next Steps
 - ssh into the host
