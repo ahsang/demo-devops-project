@@ -10,7 +10,7 @@
 - Ansible: Used to setup a baremetal ubuntu machine to host a kubernetes cluster containing the running app.
 - Terraform: Used to provision the kubernetes components step by step to ensure every step is automated and can be created/destroyed smoothly
 
-### Requirements for setting up ubuntu based host 
+### Requirements for setting up ubuntu (20.04 lts or 18.04 lts) based host 
 - Ansible 2.11.6
 ### Steps for setting up ubuntu based host 
 - Run the playbook.yaml ansible-playbook to setup the vm and install microk8s cluster along with dns(to allow kubernetes pods to access the internet) and metallb addons (To provide a loadbalancer to kubernetes for the nginx ingress)
