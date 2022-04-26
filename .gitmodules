@@ -1,3 +1,4 @@
 [submodule "testapp"]
 	path = testapp
 	url = https://github.com/ahsang/golang-cicd
+	branch = main
