@@ -11,7 +11,7 @@
 - Terraform: Used to provision the kubernetes components step by step to ensure every step is automated and can be created/destroyed smoothly
 
 ### Requirements for setting up ubuntu (20.04 lts or 18.04 lts) based host 
-- Ansible 2.11.6
+- Ansible >=2.11.6
 ### Steps for setting up ubuntu based host 
 - Run the playbook.yaml ansible-playbook to setup the vm and install microk8s cluster along with dns(to allow kubernetes pods to access the internet) and metallb addons (To provide a loadbalancer to kubernetes for the nginx ingress)
     ```
@@ -50,6 +50,7 @@
 - The [app docker image](https://hub.docker.com/repository/docker/ahsangondal/golang-cicd) is hosted in docker hub public registry which is set to auto build in case of any updates to the code
 - the app will be running behind an nginx ingress load balancer
 - [cert-manager](https://cert-manager.io/) will be deployed to generate lets encrypt ssl certs automatically so the app is accessible over tls on the given subdomain
+- you will be able to navigate to https://test.zeezouworld.com (or custom subdomain) and see the test app with a valid certificate
 
 
 
