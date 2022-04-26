@@ -2,3 +2,6 @@
 	path = testapp
 	url = https://github.com/ahsang/golang-cicd
 	branch = main
+[submodule "infrastructure-as-code"]
+	path = infrastructure-as-code
+	url = https://github.com/ahsang/certmanager-demo
